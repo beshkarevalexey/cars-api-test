@@ -1,0 +1,19 @@
+# Healthcheck
+curl http://localhost:3000/health
+
+# Info (список всех ручек с curl)
+curl http://localhost:3000/api/info
+
+# Создание автомобиля
+curl -X POST http://localhost:3000/api/cars \
+  -H "Content-Type: application/json" \
+  -d '{"brand":"BMW","model":"X5","year":2022,"color":"black","price":50000,"plateNumber":"A123BC","isSunRoof":true}'
+
+# Получение всех автомобилей
+curl http://localhost:3000/api/cars
+
+# Получение автомобиля по id
+curl http://localhost:3000/api/cars/1
+
+# Удаление автомобиля по id
+curl -X DELETE http://localhost:3000/api/cars/1
