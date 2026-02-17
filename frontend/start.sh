@@ -1,10 +1,8 @@
-#!/bin/bash
+#!/bin/sh
 PORT=3001
-IP=$(hostname -I | awk '{print $1}')
-echo "Фронт доступен по адресу: http://$IP:$PORT"
+echo "Фронт доступен по адресу: http://<IP_СЕРВЕРА>:$PORT"
 
-# Минимальный фронт через Node (можно использовать serve или любой http-сервер)
-# Для простоты создаём временный index.html
+# создаём временный frontend
 mkdir -p /app/public
 cat <<EOT >/app/public/index.html
 <!DOCTYPE html>
@@ -19,5 +17,5 @@ cat <<EOT >/app/public/index.html
 </html>
 EOT
 
-# Поднимаем простой сервер на Node
-npx serve /app/public -l $PORT
+# Поднимаем сервер на всех интерфейсах (0.0.0.0)
+npx serve /app/public -l $PORT --listen 0.0.0.0
