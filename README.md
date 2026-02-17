@@ -14,3 +14,6 @@ docker compose up -d --build
 
 3. Проверить работу API:
 curl http://localhost:3000/health
+
+4. Посмотреть логи фронт-стенда:
+docker compose logs frontend
