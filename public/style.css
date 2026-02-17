@@ -1,0 +1,31 @@
+body {
+  font-family: Arial;
+  margin: 40px;
+}
+
+section {
+  margin-bottom: 30px;
+}
+
+input {
+  margin: 5px;
+}
+
+button {
+  margin: 5px;
+  padding: 5px 10px;
+  cursor: pointer;
+}
+
+#cars {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.card {
+  padding: 10px;
+  border-radius: 8px;
+  color: white;
+  width: 200px;
+}

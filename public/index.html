@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8" />
+  <title>Cars API UI</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <h1>Cars API Dashboard</h1>
+
+  <section class="create">
+    <h2>Create Car</h2>
+    <input id="brand" placeholder="Brand" />
+    <input id="model" placeholder="Model" />
+    <input id="year" type="number" placeholder="Year" />
+    <input id="color" placeholder="Color" />
+    <input id="price" type="number" placeholder="Price" />
+    <button onclick="createCar()">Create</button>
+  </section>
+
+  <section>
+    <h2>Actions</h2>
+    <button onclick="loadCars()">Refresh List</button>
+
+    <input id="searchId" type="number" placeholder="ID" />
+    <button onclick="getCarById()">Get By ID</button>
+    <button onclick="deleteById()">Delete By ID</button>
+  </section>
+
+  <section>
+    <h2>Cars Feed</h2>
+    <div id="cars"></div>
+  </section>
+
+  <script src="app.js"></script>
+</body>
+</html>
