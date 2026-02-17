@@ -9,11 +9,16 @@
 ```bash
 cd ~/cars-api-test
 
-2. Собрать и поднять API и фронт:
+2. Собрать и поднять API и FRONT стенды:
+```bash
 docker compose up -d --build
 
-3. Проверить работу API:
-curl http://localhost:3000/health
+3. Стенды поднимутся на:
+API:
+http://localhost:3000/health
 
-4. Посмотреть логи фронт-стенда:
-docker compose logs frontend
+UI:
+http://localhost:3000
+
+4. Проверить работу API:
+curl http://localhost:3000/health
