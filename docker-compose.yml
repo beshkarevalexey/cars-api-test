@@ -8,7 +8,8 @@ services:
     image: node:18-alpine
     working_dir: /app
     volumes:
-      - ./frontend:/app
+      - ./public:/app
+      - ./start.sh:/app/start.sh
     ports:
       - "3001:3001"
     command: ["sh", "start.sh"]
