@@ -1,7 +1,7 @@
 #!/bin/sh
 PORT=3001
 
-echo "Фронт доступен по адресу: http://localhost:$PORT"
+echo "Frontend available at: http://0.0.0.0:$PORT"
 
-# Поднимаем фронт на всех интерфейсах контейнера
+# Serve on all interfaces in container
 npx serve ./public --listen "0.0.0.0:$PORT"

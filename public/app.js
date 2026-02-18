@@ -1,5 +1,8 @@
 const carsContainer = document.getElementById("cars");
 
+// Use VPS IP for API
+const API_URL = "http://195.209.218.17:3000";
+
 async function createCar() {
   const brand = document.getElementById("brand").value;
   const model = document.getElementById("model").value;
@@ -7,7 +10,7 @@ async function createCar() {
   const color = document.getElementById("color").value;
   const price = Number(document.getElementById("price").value);
 
-  const res = await fetch("http://localhost:3000/api/cars", {
+  const res = await fetch(`${API_URL}/api/cars`, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({ brand, model, year, color, price })
@@ -18,7 +21,7 @@ async function createCar() {
 }
 
 async function loadCars() {
-  const res = await fetch("http://localhost:3000/api/cars");
+  const res = await fetch(`${API_URL}/api/cars`);
   const cars = await res.json();
 
   carsContainer.innerHTML = "";
@@ -44,7 +47,7 @@ async function loadCars() {
 
 async function getCarById() {
   const id = document.getElementById("searchId").value;
-  const res = await fetch(`http://localhost:3000/api/cars/${id}`);
+  const res = await fetch(`${API_URL}/api/cars/${id}`);
   if (!res.ok) return alert("Car not found");
   const car = await res.json();
   alert(JSON.stringify(car, null, 2));
@@ -52,12 +55,12 @@ async function getCarById() {
 
 async function deleteById() {
   const id = document.getElementById("searchId").value;
-  await fetch(`http://localhost:3000/api/cars/${id}`, { method: "DELETE" });
+  await fetch(`${API_URL}/api/cars/${id}`, { method: "DELETE" });
   loadCars();
 }
 
 async function deleteCar(id) {
-  await fetch(`http://localhost:3000/api/cars/${id}`, { method: "DELETE" });
+  await fetch(`${API_URL}/api/cars/${id}`, { method: "DELETE" });
   loadCars();
 }
 
