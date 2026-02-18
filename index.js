@@ -1,6 +1,8 @@
 const express = require("express");
+const cors = require("cors");
 const app = express();
 
+app.use(cors());
 app.use(express.json());
 app.use(express.static("public"));
 
@@ -21,9 +23,7 @@ app.post("/api/cars", (req, res) => {
   const { brand, model, year, color, price } = req.body;
 
   if (!brand || !model || !year || !color || price === undefined) {
-    return res.status(400).json({
-      error: "Missing required fields"
-    });
+    return res.status(400).json({ error: "Missing required fields" });
   }
 
   const car = {
@@ -49,9 +49,7 @@ app.get("/api/cars", (req, res) => {
 app.get("/api/cars/:id", (req, res) => {
   const car = cars.find(c => c.id === Number(req.params.id));
 
-  if (!car) {
-    return res.status(404).json({ error: "Car not found" });
-  }
+  if (!car) return res.status(404).json({ error: "Car not found" });
 
   res.json(car);
 });
@@ -61,10 +59,7 @@ app.get("/api/cars/:id", (req, res) => {
 ------------------- */
 app.delete("/api/cars/:id", (req, res) => {
   const index = cars.findIndex(c => c.id === Number(req.params.id));
-
-  if (index === -1) {
-    return res.status(404).json({ error: "Car not found" });
-  }
+  if (index === -1) return res.status(404).json({ error: "Car not found" });
 
   cars.splice(index, 1);
   res.status(204).send();
@@ -77,31 +72,15 @@ app.get("/api/info", (req, res) => {
   res.json({
     message: "Available API endpoints",
     endpoints: [
-      {
-        method: "GET",
-        path: "/health",
-        curl: "curl http://localhost:3000/health"
-      },
+      { method: "GET", path: "/health", curl: "curl http://localhost:3000/health" },
       {
         method: "POST",
         path: "/api/cars",
         curl: `curl -X POST http://localhost:3000/api/cars -H "Content-Type: application/json" -d '{"brand":"BMW","model":"X5","year":2022,"color":"black","price":50000}'`
       },
-      {
-        method: "GET",
-        path: "/api/cars",
-        curl: "curl http://localhost:3000/api/cars"
-      },
-      {
-        method: "GET",
-        path: "/api/cars/:id",
-        curl: "curl http://localhost:3000/api/cars/1"
-      },
-      {
-        method: "DELETE",
-        path: "/api/cars/:id",
-        curl: "curl -X DELETE http://localhost:3000/api/cars/1"
-      }
+      { method: "GET", path: "/api/cars", curl: "curl http://localhost:3000/api/cars" },
+      { method: "GET", path: "/api/cars/:id", curl: "curl http://localhost:3000/api/cars/1" },
+      { method: "DELETE", path: "/api/cars/:id", curl: "curl -X DELETE http://localhost:3000/api/cars/1" }
     ]
   });
 });
