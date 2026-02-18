@@ -1,4 +1,7 @@
-const API_URL = "http://195.209.218.17:3000"; // здесь IP вашего сервера
+const carsContainer = document.getElementById("cars");
+
+// Use VPS IP for API
+const API_URL = "http://195.209.218.17:3000";
 
 async function createCar() {
   const brand = document.getElementById("brand").value;
@@ -13,11 +16,7 @@ async function createCar() {
     body: JSON.stringify({ brand, model, year, color, price })
   });
 
-  if (!res.ok) {
-    alert("Error creating car");
-    return;
-  }
-
+  if (!res.ok) return alert("Error creating car");
   loadCars();
 }
 
@@ -25,30 +24,31 @@ async function loadCars() {
   const res = await fetch(`${API_URL}/api/cars`);
   const cars = await res.json();
 
-  const container = document.getElementById("cars");
-  container.innerHTML = "";
+  carsContainer.innerHTML = "";
+  const fragment = document.createDocumentFragment();
 
   cars.forEach(car => {
     const div = document.createElement("div");
     div.className = "card";
     div.style.background = car.color;
-
     div.innerHTML = `
       <strong>${car.brand} ${car.model}</strong><br/>
       Year: ${car.year}<br/>
       Price: ${car.price}<br/>
       ID: ${car.id}<br/>
-      <button onclick="deleteCar(${car.id})">Delete</button>
+      <button data-id="${car.id}">Delete</button>
     `;
-    container.appendChild(div);
+    div.querySelector("button").onclick = () => deleteCar(car.id);
+    fragment.appendChild(div);
   });
+
+  carsContainer.appendChild(fragment);
 }
 
 async function getCarById() {
   const id = document.getElementById("searchId").value;
   const res = await fetch(`${API_URL}/api/cars/${id}`);
   if (!res.ok) return alert("Car not found");
-
   const car = await res.json();
   alert(JSON.stringify(car, null, 2));
 }
@@ -64,4 +64,5 @@ async function deleteCar(id) {
   loadCars();
 }
 
+// initial load
 loadCars();
